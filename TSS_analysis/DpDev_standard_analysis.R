@@ -257,15 +257,4 @@ exp_short <- normalize_counts(exp_short, data_type = "tss", method = "DESeq2")
 #plotting sequence logo for all three replicates
 plot_sequence_logo(exp_short, samples="DpA_1")
 ggsave(file="DpulA_r1_sequenceLogo.png")
-##### threshold exploration
-
-plot_threshold_exploration(exp, samples="DpA_1", point_size=1) + scale_colour_viridis_c()
-ggsave(file="DpulA_Count_Threshold.png")
-exp <- apply_threshold(exp, threshold=3, n_samples=1)
-
-plot_density(exp, data_type = "tss", samples = "DpA_1")
-ggsave(file="DpulA_Densityplot.png")
-
-plot_dinucleotide_frequencies(exp, samples = "DpA_1") + scale_fill_viridis_c()
-ggsave(file="Dinucleotide_Frequencies.png")
-
+##### end of sequence analysis

@@ -1,6 +1,6 @@
 ### TSRexploreR standard processing module
 
-setwd("/scratch/scwalls/STRIPEseq_pipelines/GoSTRIPES_sing/STRIPES/tsr_As") 
+setwd("/scratch/scwalls/STRIPEseq_pipelines/GoSTRIPES_sing/STRIPES/tsr_Fs") 
 
 library(TSRchitect)
 library(TSRexploreR)
@@ -137,10 +137,10 @@ tss.3.short.gr <- makeGRangesFromDataFrame(tss_r3_1_10,
 )
 
 Dp.tss <- list(tss.1.gr, tss.2.gr, tss.3.gr)
-names(Dp.tss) <- c("DpA_1", "DpA_2", "DpA_3")
+names(Dp.tss) <- c("DpF_1", "DpF_2", "DpF_3")
 
 Dp.tss.short <- list(tss.1.short.gr, tss.2.short.gr, tss.3.short.gr)
-names(Dp.tss.short) <- c("DpA_1","DpA_2","DpA_3")
+names(Dp.tss.short) <- c("DpF_1","DpF_2","DpF_3")
 
 #making granges files from tsr data frames
 tsr.1.gr <- makeGRangesFromDataFrame(tsr.1,
@@ -168,7 +168,7 @@ tsr.3.gr <- makeGRangesFromDataFrame(tsr.3,
 )
 
 Dp.tsr <- list(tsr.1.gr, tsr.2.gr, tsr.3.gr)
-names(Dp.tsr) <- c("DpA_1", "DpA_2", "DpA_3")
+names(Dp.tsr) <- c("DpF_1", "DpF_2", "DpF_3")
 
 
 #Creating the TSR explorer object
@@ -195,35 +195,35 @@ plot_correlation(
   heatmap_colors=viridis::viridis(100)
 )
 
-ggsave(file="DpA_correlation_matrix.png") #saving the plot
+ggsave(file="DpF_correlation_matrix.png") #saving the plot
 
 ### plot genomic distribution of TSSs
 
-plot_genomic_distribution(exp, data_type="tss", samples=c("DpA_1","DpA_2","DpA_3")) +
+plot_genomic_distribution(exp, data_type="tss", samples=c("DpF_1","DpF_2","DpF_3")) +
   scale_fill_viridis_d(direction=-1, name="Annotation") 
 
-ggsave(file="DpA_genomic_distribution.png") #saving the plot
+ggsave(file="DpF_genomic_distribution.png") #saving the plot
 
 ### plot density
 
-plot_density(exp, data_type="tss", samples=c("DpA_1", "DpA_2", "DpA_3"))
+plot_density(exp, data_type="tss", samples=c("DpF_1", "DpF_2", "DpF_3"))
 
 #Current error
 #Error in `[.data.table`(sample_data, , `:=`(samples, factor(samples, levels = samples))) : 
 #Supplied 3 items to be assigned to 384133 items of column 'samples'. If you wish to 'recycle' the RHS please use rep() to make this intent clear to readers of your code.
 
-ggsave(file="DpA_density.png") #saving the plot
+ggsave(file="DpF_density.png") #saving the plot
 
 ### plot TSS heatmap
 
 plot_heatmap(
-  exp, data_type="tss", samples=c("DpA_1","DpA_2","DpA_3"),
+  exp, data_type="tss", samples=c("DpF_1","DpF_2","DpF_3"),
   upstream=250, downstream=250,
   use_normalized=TRUE,
   rasterize=TRUE, raster_dpi=150
 )
 
-ggsave(file="DpA_tss_heatmap.png") #saving the plot
+ggsave(file="DpF_tss_heatmap.png") #saving the plot
 
 ### formatting/normalizing tsrs
 exp <- format_counts(exp, data_type="tsr")
@@ -235,13 +235,13 @@ exp <- annotate_features(exp, data_type = "tsr", feature_type="gene")
 ## this doesn't work yet
 
 plot_heatmap(
-  exp, data_type="tsr", samples=c("DpA_1","DpA_2","DpA_3"),
+  exp, data_type="tsr", samples=c("DpF_1","DpF_2","DpF_3"),
   upstream=250, downstream=250,
   use_normalized=TRUE,
   rasterize=TRUE, raster_dpi=150
 )
 
-ggsave(file="DpA_tsr_heatmap.png") #saving the plot
+ggsave(file="DpF_tsr_heatmap.png") #saving the plot
 
 ##### Sequence analysis
 ## creating a truncated object for sequence analysis
@@ -255,17 +255,17 @@ exp_short <- format_counts(exp_short, data_type="tss")
 exp_short <- normalize_counts(exp_short, data_type = "tss", method = "DESeq2")
 
 #plotting sequence logo for all three replicates
-plot_sequence_logo(exp_short, samples="DpA_1")
-ggsave(file="DpulA_r1_sequenceLogo.png")
+plot_sequence_logo(exp_short, samples="DpF_1")
+ggsave(file="DpulF_r1_sequenceLogo.png")
 ##### threshold exploration
 
-plot_threshold_exploration(exp, samples="DpA_1", point_size=1) + scale_colour_viridis_c()
-ggsave(file="DpulA_Count_Threshold.png")
+plot_threshold_exploration(exp, samples="DpF_1", point_size=1) + scale_colour_viridis_c()
+ggsave(file="DpulF_Count_Threshold.png")
 exp <- apply_threshold(exp, threshold=3, n_samples=1)
 
-plot_density(exp, data_type = "tss", samples = "DpA_1")
-ggsave(file="DpulA_Densityplot.png")
+plot_density(exp, data_type = "tss", samples = "DpF_1")
+ggsave(file="DpulF_Densityplot.png")
 
-plot_dinucleotide_frequencies(exp, samples = "DpA_1") + scale_fill_viridis_c()
-ggsave(file="Dinucleotide_Frequencies.png")
+plot_dinucleotide_frequencies(exp, samples = "DpF_1") + scale_fill_viridis_c()
+ggsave(file="DpulF_Dinucleotide_Frequencies.png")
 

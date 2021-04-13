@@ -1,5 +1,5 @@
 #setwd("/scratch/tswenty/GoSTRIPES_sing/STRIPES/tsr_As")
-setwd("/scratch/rraborn/DpDevel_tss/figures/")
+setwd("/scratch/scwalls/STRIPEseq_pipelines/GoSTRIPES_sing/STRIPES/figures/4_7_21")
 
 library(TSRchitect)
 library(TSRexploreR)
